@@ -21,7 +21,14 @@ def pregunta_01():
     214
 
     """
-    return
+    with open('data.csv', 'r') as csv_file:
+        csv_file = csv_file.readlines()
+
+    iSuma = 0
+    for line in csv_file:
+        iSuma += int(line.split()[1])
+    
+    return iSuma
 
 
 def pregunta_02():
@@ -39,7 +46,16 @@ def pregunta_02():
     ]
 
     """
-    return
+    with open('data.csv', 'r') as csv_file:
+        csv_file = csv_file.readlines()
+    dicLetras = {}
+    for line in csv_file:
+        sLetra = line.split()[0]
+        if sLetra in dicLetras:
+            dicLetras[sLetra] +=1
+        else:
+            dicLetras[sLetra] = 1
+    return sorted(list(dicLetras.items()))
 
 
 def pregunta_03():
@@ -57,7 +73,17 @@ def pregunta_03():
     ]
 
     """
-    return
+    with open('data.csv', 'r') as csv_file:
+        csv_file = csv_file.readlines()
+    dicSumaLetras = {}
+    for line in csv_file:
+        sLetra = line.split()[0]
+        if sLetra in dicSumaLetras:
+            dicSumaLetras[sLetra] += int(line.split()[1])
+        else:
+            dicSumaLetras[sLetra] = int(line.split()[1])
+
+    return sorted(list(dicSumaLetras.items()))
 
 
 def pregunta_04():
@@ -82,7 +108,17 @@ def pregunta_04():
     ]
 
     """
-    return
+    with open('data.csv', 'r') as csv_file:
+        csv_file = csv_file.readlines()
+    dicSumaMeses = {}
+    for line in csv_file:
+        sMes = (line.split()[2]).split('-')[1]
+        if sMes in dicSumaMeses:
+            dicSumaMeses[sMes] +=1
+        else:
+            dicSumaMeses[sMes] = 1
+    
+    return sorted(list(dicSumaMeses.items()))
 
 
 def pregunta_05():
@@ -100,7 +136,18 @@ def pregunta_05():
     ]
 
     """
-    return
+    with open('data.csv', 'r') as csv_file:
+        csv_file = csv_file.readlines()
+    dicMaxMin = {}
+    for line in csv_file:
+        sLetra = line.split()[0]
+        iNum = int(line.split()[1])
+        if sLetra in dicMaxMin:
+            dicMaxMin[sLetra] = [max(iNum, dicMaxMin[sLetra][0]), min(iNum, dicMaxMin[sLetra][1])]
+        else:
+            dicMaxMin[sLetra] = [iNum, iNum]
+    
+    return sorted([(item, dicMaxMin[item][0], dicMaxMin[item][1]) for item in dicMaxMin])
 
 
 def pregunta_06():
@@ -125,7 +172,20 @@ def pregunta_06():
     ]
 
     """
-    return
+    with open('data.csv', 'r') as csv_file:
+        csv_file = csv_file.readlines()
+    dicClaves = {}
+    for line in csv_file:
+        sClaves = line.split()[4].split(',')
+        for sValor in sClaves:
+            sClave = sValor.split(':')[0]
+            sValor = int(sValor.split(':')[1])
+            if sClave in dicClaves:
+                dicClaves[sClave] = [min(sValor, dicClaves[sClave][0]), max(sValor, dicClaves[sClave][1])]
+            else:
+                dicClaves[sClave] = [sValor, sValor]
+
+    return sorted([(item, dicClaves[item][0], dicClaves[item][1]) for item in dicClaves])
 
 
 def pregunta_07():
@@ -149,7 +209,18 @@ def pregunta_07():
     ]
 
     """
-    return
+    with open('data.csv', 'r') as csv_file:
+        csv_file = csv_file.readlines()
+    dicNumeros = {}
+    for line in csv_file:
+        sNumero = int(line.split()[1])
+        sLetra = line.split()[0]
+        if sNumero in dicNumeros:
+            dicNumeros[sNumero].append(sLetra)
+        else:
+            dicNumeros[sNumero] = [sLetra]
+    
+    return sorted(list(dicNumeros.items()))
 
 
 def pregunta_08():
@@ -174,7 +245,19 @@ def pregunta_08():
     ]
 
     """
-    return
+    with open('data.csv', 'r') as csv_file:
+        csv_file = csv_file.readlines()
+    dicNumeros = {}
+    for line in csv_file:
+        sNumero = int(line.split()[1])
+        sLetra = line.split()[0]
+        if sNumero in dicNumeros:
+            dicNumeros[sNumero].append(sLetra)
+            dicNumeros[sNumero] = sorted(set(dicNumeros[sNumero]))
+        else:
+            dicNumeros[sNumero] = [sLetra]
+    
+    return sorted(list(dicNumeros.items()))
 
 
 def pregunta_09():
@@ -197,7 +280,20 @@ def pregunta_09():
     }
 
     """
-    return
+    with open('data.csv', 'r') as csv_file:
+        csv_file = csv_file.readlines()
+    dicClaves = {}
+    for line in csv_file:
+        sClaves = line.split()[4].split(',')
+        for sValor in sClaves:
+            sClave = sValor.split(':')[0]
+            sValor = int(sValor.split(':')[1])
+            if sClave in dicClaves:
+                dicClaves[sClave] += 1
+            else:
+                dicClaves[sClave] = 1
+    
+    return dicClaves
 
 
 def pregunta_10():
@@ -218,7 +314,15 @@ def pregunta_10():
 
 
     """
-    return
+    with open('data.csv', 'r') as csv_file:
+        csv_file = csv_file.readlines()
+    listConteo = []
+    for line in csv_file:
+        sLetra = line.split()[0]
+        listConteo.append((sLetra , len(line.split()[3].split(',')), len(line.split()[4].split(','))))
+
+    return listConteo
+
 
 
 def pregunta_11():
@@ -239,7 +343,19 @@ def pregunta_11():
 
 
     """
-    return
+    with open('data.csv', 'r') as csv_file:
+        csv_file = csv_file.readlines()
+    dicLetras = {}
+    for line in csv_file:
+        sClaves = line.split()[3].split(',')
+        for sClave in sClaves:
+            sValor = int(line.split()[1])
+            if sClave in dicLetras:
+                dicLetras[sClave] += sValor
+            else:
+                dicLetras[sClave] = sValor
+    
+    return dicLetras
 
 
 def pregunta_12():
@@ -257,4 +373,16 @@ def pregunta_12():
     }
 
     """
-    return
+    with open('data.csv', 'r') as csv_file:
+        csv_file = csv_file.readlines()
+    dicSumaLetras = {}
+    for line in csv_file:
+        sLetra = line.split()[0]
+        listColumna5 = line.split()[4].split(',') 
+        sTotal = [int(i.split(':')[1]) for i in listColumna5]
+        if sLetra in dicSumaLetras:
+            dicSumaLetras[sLetra] += sum(sTotal)
+        else:
+            dicSumaLetras[sLetra] = sum(sTotal)
+
+    return dicSumaLetras
